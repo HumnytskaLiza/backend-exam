@@ -5,7 +5,7 @@ const schema = new Schema({
   lastName: { type: String, required: true },
   login: { type: String, required: true },
   password: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
+  phoneNumber: { type: Number, required: true },
 });
 
 const Users = new model("users", schema, "users");
