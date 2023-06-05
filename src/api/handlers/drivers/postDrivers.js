@@ -1,6 +1,6 @@
 const { Drivers } = require("../../../models");
 
-module.exports.createDriver = async (req, res) => {
+module.exports.postDrivers = async (req, res) => {
   const {} = req.body;
 
   const driver = new Drivers({});
