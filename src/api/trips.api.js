@@ -28,5 +28,6 @@ const router = Router();
 // );
 
 router.get("/trips", wrapperApi(trips.getTrips));
+router.post("/trips", wrapperApi(trips.postTrips));
 
 module.exports = { router };

@@ -1,9 +1,22 @@
 const { Drivers } = require("../../../models");
 
 module.exports.postDrivers = async (req, res) => {
-  const {} = req.body;
+  const { firstName, lastName, login, password, phoneNumber, car={seatsAvailable, carId, model, color}, tripIds=[_id] } = req.body;
 
-  const driver = new Drivers({});
+  let check = await Drivers.findOne({ login: login, login: login });
+  if (check) {
+    return res.status(400).send({ message: "This login is already in use" });
+  }
+
+  if (!phoneNumber) {
+    return res.status(400).send({ message: "You should add your phoneNumber" });
+  } else if (phoneNumber.length < 10) {
+    return res.status(400).send({ message: "Your phoneNumber is too short" });
+  } else if (phoneNumber.length > 10) {
+    return res.status(400).send({ message: "Your phoneNumber is too long" });
+  }
+
+  const driver = new Drivers({ firstName, lastName, login, password, phoneNumber, car, tripIds });
   const doc = await driver.save();
 
   return res.status(200).send(doc);
