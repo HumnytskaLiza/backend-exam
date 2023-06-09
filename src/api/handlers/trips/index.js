@@ -1,5 +1,5 @@
 module.exports = {
-    ...require("./getTrips"),
-    ...require("./postTrips"),
-  };
-  
+  ...require("./getTrips"),
+  ...require("./getTripById"),
+  ...require("./postTrips"),
+};

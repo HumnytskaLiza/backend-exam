@@ -28,6 +28,7 @@ const router = Router();
 // );
 
 router.get("/trips", wrapperApi(trips.getTrips));
+router.get("/trips/:_id", wrapperApi(trips.getTripById));
 router.post("/trips", wrapperApi(trips.postTrips));
 
 module.exports = { router };

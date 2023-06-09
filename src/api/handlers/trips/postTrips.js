@@ -3,14 +3,7 @@ const { Drivers } = require("../../../models");
 const { Types } = require("mongoose");
 
 module.exports.postTrips = async (req, res) => {
-  const {
-    driverId,
-    pointA,
-    pointB,
-    price,
-    date = [{ start, end }],
-    userIds = [{ _id, count }],
-  } = req.body;
+  const { driverId, pointA, pointB, price, date, userIds } = req.body;
 
   if (!driverId) {
     return res.status(400).send({ message: "Only a driver can create a trip" });
