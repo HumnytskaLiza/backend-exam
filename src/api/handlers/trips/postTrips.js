@@ -15,6 +15,11 @@ module.exports.postTrips = async (req, res) => {
         .status(400)
         .send({ message: "Price must be greater than zero" });
     }
+    if (date.end < date.start) {
+      return res
+        .status(400)
+        .send({ message: "You have entered the wrong date" });
+    }
     const trip = new Trips({ pointA, pointB, price, date, userIds });
     driver.tripIds.push(trip._id);
     const doc = await trip.save();
