@@ -4,31 +4,9 @@ const { wrapperApi } = require("../shared");
 const { drivers } = require("./handlers");
 const router = Router();
 
-// const priceMiddleware =
-//   ({ isOptional }) =>
-//   (req, res, next) => {
-//     const { price } = req.body;
-//     const needCheck = isOptional ? price != null : true;
-//     if (needCheck && price <= 0) {
-//       return res.status(400).send({
-//         message: `Price must be more than 0`,
-//       });
-//     }
-//     return next();
-//   };
-
-router.post(
-  "/drivers",
-  //   priceMiddleware({ isOptional: false }),
-  wrapperApi(drivers.postDrivers)
-);
-
-// router.patch(
-//   "/dishes/:_id ",
-//   priceMiddleware({ isOptional: true }),
-//   wrapperApi(dishes.updateDish)
-// );
-
+router.post("/drivers", wrapperApi(drivers.postDrivers));
+router.get("/drivers/_:id/trips", wrapperApi(drivers.getDriversTrips));
 router.get("/drivers", wrapperApi(drivers.getDrivers));
+router.patch("/drivers/_:id/car", wrapperApi(drivers.updateDriver));
 
 module.exports = { router };

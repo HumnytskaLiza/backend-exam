@@ -1,28 +1,31 @@
 const { Trips } = require("../../../models");
 
 module.exports.getTrips = async (req, res) => {
-  let { date, price } = req.query;
+  let { price, start, end } = req.query;
   const queryDb = {};
-  if (date) {
-    const parsedDate = JSON.parse(date);
-    if (parsedDate.start) {
-      queryDb.date = { $gt: new Date(parsedDate.start) };
-    } else if (parsedDate.end) {
-      queryDb.date = { $lt: new Date(parsedDate.end) };
-    } else if (parsedDate.start && parsedDate.end) {
-      queryDb.date = {
-        $gt: new Date(parsedDate.start),
-        $lt: new Date(parsedDate.end),
-      };
-    }
+  if (start) {
+    const parsedStart = JSON.parse(start);
+    queryDb["date.start"] = parsedStart;
   }
+  if (end) {
+    const parsedEnd = JSON.parse(end);
+    queryDb["date.end"] = parsedEnd;
+  }
+
   if (price) {
+    if (price <= 0) {
+      return res
+        .status(400)
+        .send({ message: "Price should be greater than zero" });
+    }
     const parsedPrice = JSON.parse(price);
     if (parsedPrice.gt) {
       queryDb.price = { $gt: parsedPrice.gt };
-    } else if (parsedPrice.lt) {
+    }
+    if (parsedPrice.lt) {
       queryDb.price = { $lt: parsedPrice.lt };
-    } else if (parsedPrice.gt && parsedPrice.lt) {
+    }
+    if (parsedPrice.gt && parsedPrice.lt) {
       if (parsedPrice.gt > parsedPrice.lt || parsedPrice.gt == parsedPrice.lt) {
         return res
           .status(400)
