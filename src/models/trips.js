@@ -11,8 +11,8 @@ const schema = new Schema({
 
   userIds: [
     {
-      _id: { type: Types.ObjectId, required: true },
-      count: { type: Number, required: true },
+      _id: { type: Types.ObjectId },
+      count: { type: Number },
     },
   ],
 });

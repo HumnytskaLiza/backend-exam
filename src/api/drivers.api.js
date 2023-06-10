@@ -5,8 +5,7 @@ const { drivers } = require("./handlers");
 const router = Router();
 
 router.post("/drivers", wrapperApi(drivers.postDrivers));
-router.get("/drivers/_:id/trips", wrapperApi(drivers.getDriversTrips));
-router.get("/drivers", wrapperApi(drivers.getDrivers));
-router.patch("/drivers/_:id/car", wrapperApi(drivers.updateDriver));
+router.get("/drivers/:_id/trips", wrapperApi(drivers.getDriversTrips));
+router.patch("/drivers/:_id/car", wrapperApi(drivers.updateDriver));
 
 module.exports = { router };
