@@ -3,7 +3,7 @@ const { Users } = require("../../../models");
 module.exports.postUsers = async (req, res) => {
   const { firstName, lastName, login, password, phoneNumber } = req.body;
 
-  let check = await Users.findOne({ login: login, login: login });
+  let check = await Users.findOne({ login: login });
   if (check) {
     return res.status(400).send({ message: "This login is already in use" });
   }
