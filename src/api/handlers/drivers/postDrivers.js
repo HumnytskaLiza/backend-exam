@@ -4,7 +4,7 @@ module.exports.postDrivers = async (req, res) => {
   const { firstName, lastName, login, password, phoneNumber, car, tripIds } =
     req.body;
 
-  let check = await Drivers.findOne({ login: login, password: password });
+  let check = await Drivers.findOne({ login: login });
   if (check) {
     return res.status(400).send({ message: "This login is already in use" });
   }
